@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Trendy</title>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+	<link rel="stylesheet" href="{% static 'css/medium-editor.css' %}">
+	<link rel="stylesheet" href="{% static 'css/blog.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat|Russo+One" rel="stylesheet">
+	<script src="{% static 'js/jquery.js' %}"></script>
+	<script src="{% static 'js/medium-editor.js' %}"></script>
+</head>
+<body>
+	<nav class="navbar navbar-default techfont custom-navbar">
+		<div class="container">
+			<ul class="nav navbar-nav">
+				<li><a href="{% url 'blog:post_list' %}" class="navbar-brand bigbrand">Trendy</a></li>
+				<li><a href="{% url 'blog:about' %}">About</a></li>
+				<li><a href="https://www.github.com">Github</a></li>
+				<li><a href="https://www.linkedin.com">LinkedIn</a></li>
+			</ul>
+
+			<ul class="nav navbar-nav navbar-right">
+				{% if user.is_authenticated %}
+					<li><a href="{% url 'blog:new_post' %}">New Post</a></li>
+					<li><a href="{% url 'blog:post_draft_list' %}">Draft Post</a></li>
+					<li><a href="{% url 'logout' %}">Logout</a></li>
+					<li style="padding-top: 10px;">Welcome: {{ user.username }}</li>
+
+				{% else %}
+					<li><a href="{% url 'login' %}"> <span class="glyphicon glyphion-user"></span> Login</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</nav>
+	<div class="content container loader">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="blog_posts">
+					{% block content %}
+
+					{% endblock %}
+				</div>
+			</div>
+			<div class="col-md-4">
+				
+			</div>
+		</div>
+
+	</div>
+
+<!-- Footer -->
+	<section id="footer">
+		<div class="container">
+			<div class="row ">
+				<div class="col-md-12">
+					<ul class="list-unstyled quick-links">
+						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>Home</a></li>
+						<li><a href="javascript:void();"><i class="fa fa-angle-double-right"></i>About</a></li>
+
+						<li class="text-center">CopyRights: &copy; 2018</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- ./Footer -->
+	<script src="{% static 'js/bootstrap.js' %}"></script>
+</body>
+</html>
